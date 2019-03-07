@@ -81,8 +81,7 @@ h2 {
 h2:target {
 	color: #007bff;
 }
-h2:target + section {
-	color: #007bff;
+h2:target + p {
 	color: #222;
 }
 section {
