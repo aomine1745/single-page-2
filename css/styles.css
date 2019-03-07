@@ -55,7 +55,6 @@ main {
 	text-align: justify;
 	background-color: #fff;
 	color: rgba(0, 0, 0, .5);
-	scroll-snap-type: y mandatory;
 }
 main::-webkit-scrollbar {
 	width: 12px;
@@ -81,13 +80,12 @@ h2 {
 h2:target {
 	color: #007bff;
 }
-h2:target + p {
+h2:target + section {
 	color: #222;
 }
 section {
 	width: 80%;
 	margin: 0 auto;
-	scroll-snap-align: start;
 }
 footer {
 	margin-top: 50px;
