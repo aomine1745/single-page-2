@@ -26,27 +26,174 @@ header {
 header .brand {
 	color: #262626;
 	font-size: 1.5em;
+	padding: 11px 0;
 }
+.btn-toggle {
+	display: none;
+}
+.sidenav-overlay{
+	display: none;
+}
+@media only screen and (max-width: 767.8px){
+	.btn-toggle {
+		border: none;
+		outline: none;
+		background-color: transparent;
+		user-select: none;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		cursor: pointer;
+		transition: transform 0.1s ease-out;
+	}
+	.btn-toggle:active {
+		transform: translateY(3px);
+	}
+	.line {
+		width: 30px;
+		padding: 3px;
+	}
+	.line:after {
+		content: '';
+		display: block;
+		height: 3px;
+		background-color: rgba(0, 0, 0, .7);
+		border-radius: 2px;
+		transform: translateZ(0) rotate(0);
+		transition: background-color 0.2s ease-out;
+	}
+	.btn-toggle:focus .line:after{
+		background-color: #262626;
+	}
+	.open .line:nth-child(1) {
+		animation: jump-1 .9s forwards ease;
+	}
+	.open .line:nth-child(1):after {
+		animation: line-1 .9s forwards ease-in-out;
+	}
+	.open .line:nth-child(2) {
+		animation: jump-2 .9s forwards ease;
+	}
+	.open .line:nth-child(2):after {
+		animation: line-2 .9s forwards ease-in-out;
+	}
+	.close .line:nth-child(1) {
+		animation: jump-1 .9s reverse ease;
+	}
+	.close .line:nth-child(1):after {
+		animation: line-1 .9s reverse ease-in-out;
+	}
+	.close .line:nth-child(2) {
+		animation: jump-2 .9s reverse ease;
+	}
+	.close .line:nth-child(2):after {
+		animation: line-2 .9s reverse ease-in-out;
+	}
+	.open .line:nth-child(3), .close .line:nth-child(3) {
+		animation: jump-3 .9s forwards ease-out;
+	}
+	@keyframes line-1 {
+		10% {
+			transform: translateZ(0) rotate(0);
+		}
+		80% {
+			transform: translateZ(0) rotate(395deg);
+		}
+		90%, 100% {
+			transform: translateZ(0) rotate(405deg);
+		}
+	}
+	@keyframes line-2 {
+		10% {
+			transform: translateZ(0) rotate(0);
+		}
+		20% {
+			transform: translateZ(0) rotate(10deg);
+		}
+		90%, 100% {
+			transform: translateZ(0) rotate(-405deg);
+		}
+	}
+	@keyframes jump-1 {
+		10% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-90px);
+		}
+		90%, 100% {
+			transform: translateY(2.5px);
+		}
+	}
+	@keyframes jump-2 {
+		10% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-15px);
+		}
+		85%, 100% {
+			transform: translateY(-7px);
+		}
+	}
+	@keyframes jump-3 {
+		10% {
+			transform: translateY(-7.5px) rotate(15deg);
+		}
+		30% {
+			transform: translateY(-10px) rotate(-10deg);
+		}
+		50% {
+			transform: translateY(7.5px) rotate(5deg);
+		}
+		80% {
+			transform: translateY(0);
+		}
+	}
+	.sidenav-overlay{
+		background-color: rgba(0, 0, 0, .5);
+		height: 100vh;
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		visibility: hidden;
+		opacity: 0;
+		transition: .5s;
+	}
+}
+
 header ul {
 	display: flex;
 	list-style: none;
 }
+header nav ul li{
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 header ul li a{
 	display: inline-block;
-	margin: 16px;
+	margin: 0 16px;
 	color: rgba(0, 0, 0, .7);
 	transition: all .3s ease;
 }
 header ul li a.active{
 	color: #007bff;
-	/* border-bottom: 1px solid #007bff; */
+	position: relative;
 }
-header ul li a:hover{
-	color: #007bff;
+header ul li a.active:before{
+	content: '\f107';
+	font-family:"Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 12px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -180%);
 }
-header ul li:nth-child(4) a{
+header ul li:last-child a{
 	margin-right: 0;
 }
+
 main {
 	width: 100%;
 	margin: 0 auto;
@@ -77,7 +224,7 @@ h2 {
 	transition: .5s;
 	transition-delay: .3s;
 }
-h2:target {
+h2:target{
 	color: #007bff;
 }
 h2:target + section {
@@ -93,4 +240,53 @@ footer {
 	color: #262626;
 	text-align: center;
 	padding: 50px 0;
+}
+@media only screen and (min-width: 1024px){
+	header ul li a:hover{
+		color: #007bff;
+	}
+}
+@media only screen and (max-width: 767.8px){
+	header .brand{
+		text-align: center;
+		width: 100%;
+	}
+	.btn-toggle{
+		display: block;
+		position: absolute;
+		z-index: 3;
+	}
+	header nav{
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 300px;
+		background-color: #fff;
+		z-index: 2;
+		box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+		transform: translateX(-100%);
+		transition: .5s;
+	}
+	.open + nav{
+		transform: translateX(0);	
+	}
+	header nav ul{
+		flex-direction: column;
+		align-items: center;
+	}
+	header ul li a{
+		margin: 16px 0;
+		font-size: 1.5em;
+	}
+	header ul li a.active:before{
+		content: '';
+	}
+	.sidenav-overlay{
+		display: block;
+	}
+	.open ~ .sidenav-overlay{
+		opacity: 1;
+		visibility: visible;
+	}
 }
