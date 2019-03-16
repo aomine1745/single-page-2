@@ -17,6 +17,9 @@ sections = [];
 //Load
 window.onload = () => {
 	headerH = header.offsetHeight;
+	main.style.height = (window.innerHeight - headerH)+'px';
+	// main.style.height = document.documentElement.clientHeight;
+
 	section.forEach((e, i) => {
 		sections[e.id] = e.offsetTop - headerH;
 	});
@@ -65,6 +68,7 @@ function removeV(){
 //Resize
 window.onresize = ()=>{
 	headerH = header.offsetHeight;
+	main.style.height = (window.innerHeight - headerH)+'px';
 	section.forEach((e, i) => {
 		sections[e.id] = e.offsetTop - headerH;
 	});

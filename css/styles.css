@@ -197,7 +197,6 @@ header ul li:last-child a{
 main {
 	width: 100%;
 	margin: 0 auto;
-	height: calc(100vh - 57px);
 	overflow-y: scroll;
 	text-align: justify;
 	background-color: #fff;
